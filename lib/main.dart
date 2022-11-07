@@ -45,14 +45,18 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: AnimatedOpacity(
+        child: TweenAnimationBuilder(
+          tween: ColorTween(
+              begin: opaque ? Colors.grey : const Color(0xffB9125D),
+              end: opaque ? const Color(0xffB9125D) : Colors.grey),
           duration: const Duration(seconds: 2),
-          opacity: opaque ? 1 : 0,
-          child: const Icon(
-            Icons.favorite,
-            size: 120,
-            color: Color(0xffB9125D),
-          ),
+          builder: (BuildContext context, Color? color, Widget? child) {
+            return Icon(
+              Icons.favorite,
+              size: 120,
+              color: color,
+            );
+          },
         ),
       ),
       floatingActionButton: FloatingActionButton(
