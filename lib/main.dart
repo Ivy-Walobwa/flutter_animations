@@ -45,12 +45,14 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: AnimatedOpacity(
+        child: AnimatedContainer(
           duration: const Duration(seconds: 2),
-          opacity: opaque ? 1 : 0,
+          width: opaque ? 200 : 100,
+          height: opaque ? 100 : 200,
+          color: opaque ? Colors.greenAccent : Colors.amberAccent,
           child: const Icon(
             Icons.favorite,
-            size: 120,
+            size: 100,
             color: Color(0xffB9125D),
           ),
         ),
