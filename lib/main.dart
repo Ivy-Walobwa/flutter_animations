@@ -30,14 +30,35 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  bool opaque = true;
+  void animate() {
+    setState(() {
+      opaque = !opaque;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: const Color(0xffB9125D),
         title: Text(widget.title),
       ),
-      body: const Center(
-        child: Text("Animation"),
+      body: Center(
+        child: AnimatedOpacity(
+          duration: const Duration(seconds: 2),
+          opacity: opaque ? 1 : 0,
+          child: const Icon(
+            Icons.favorite,
+            size: 120,
+            color: Color(0xffB9125D),
+          ),
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: const Color(0xffB9125D),
+        onPressed: animate,
+        child: const Icon(Icons.touch_app),
       ),
     );
   }
