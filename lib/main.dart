@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rive/rive.dart';
 
 void main() {
   runApp(const MyApp());
@@ -33,12 +34,12 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xff1B1B1B),
       appBar: AppBar(
+        backgroundColor: const Color(0xffB9125D),
         title: Text(widget.title),
       ),
-      body: const Center(
-        child: Text("Animation"),
-      ),
+      body: const RiveAnimation.asset('assets/heart.riv'),
     );
   }
 }
