@@ -29,12 +29,23 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  bool opaque = true;
-  void animate() {
-    setState(() {
-      opaque = !opaque;
-    });
+class _MyHomePageState extends State<MyHomePage>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      duration: const Duration(seconds: 2),
+      vsync: this,
+    )..repeat(reverse: true);
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 
   @override
@@ -45,22 +56,14 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: AnimatedContainer(
-          duration: const Duration(seconds: 2),
-          width: opaque ? 200 : 100,
-          height: opaque ? 100 : 200,
-          color: opaque ? Colors.greenAccent : Colors.amberAccent,
+        child: FadeTransition(
+          opacity: _controller,
           child: const Icon(
             Icons.favorite,
             size: 100,
             color: Color(0xffB9125D),
           ),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: const Color(0xffB9125D),
-        onPressed: animate,
-        child: const Icon(Icons.touch_app),
       ),
     );
   }
