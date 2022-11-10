@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -56,14 +58,18 @@ class _MyHomePageState extends State<MyHomePage>
         title: Text(widget.title),
       ),
       body: Center(
-        child: FadeTransition(
-          opacity: _controller,
-          child: const Icon(
-            Icons.favorite,
-            size: 100,
-            color: Color(0xffB9125D),
-          ),
-        ),
+        child: AnimatedBuilder(
+            animation: _controller,
+            builder: (context, snapshot) {
+              return Transform.rotate(
+                angle: _controller.value * 2.0 * math.pi,
+                child: const Icon(
+                  Icons.favorite,
+                  size: 100,
+                  color: Color(0xffB9125D),
+                ),
+              );
+            }),
       ),
     );
   }
